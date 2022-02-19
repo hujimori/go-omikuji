@@ -20,7 +20,12 @@ func getOmikuji() string {
 }
 
 func handler(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, getOmikuji())
+	msg := r.FormValue("p")
+	if len(msg) > 0 {
+		fmt.Fprintf(w, msg+"さんの運勢は「"+getOmikuji()+"」です！")
+	} else {
+		fmt.Fprintf(w, getOmikuji())
+	}
 }
 
 func main() {
